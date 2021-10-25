@@ -1,0 +1,110 @@
+= Sway Config
+Jordan Williams <jordan@jwillikers.com>
+:experimental:
+:icons: font
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+:Sway: https://swaywm.org/[Sway]
+
+My configuration for {Sway}.
+
+== Usage
+
+This repository contains my configuration file for {Sway}.
+This file is synchronized using this Git repository.
+The following instructions detail how to use and sync this repository.
+
+=== Install
+
+Install these settings with the following instructions.
+
+. Clone this repository.
++
+[source,sh]
+----
+git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
+----
+
+. Create the _~/.config/sway/_ directory.
++
+[source,sh]
+----
+mkdir ~/.config/sway/
+----
+
+. Copy the `config` file to the appropriate location.
++
+[source,sh]
+----
+cp ~/Projects/sway-config/config ~/.config/sway/
+----
+
+=== Update
+
+To update the settings in this repository from an existing installation, follow these steps.
+
+. If you haven't already done so, clone this repository.
++
+[source,sh]
+----
+git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
+----
+
+. Copy the `config` and `ignore` files from the appropriate location to the Git repository.
++
+[source,sh]
+----
+cp ~/.config/sway/config ~/Projects/sway-config/
+----
+
+. Validate the Sway configuration file.
++
+[source,sh]
+----
+sway --validate ~/Projects/sway-config/config
+----
+
+. Stage the updated file.
++
+[source,sh]
+----
+git -C ~/Projects/sway-config add -A
+----
+
+. Commit.
++
+[source,sh]
+----
+git -C ~/Projects/sway-config commit -m "Update configuration putting all others to shame"
+----
+
+. Push the changes back to the central repository.
++
+[source,sh]
+----
+git -C ~/Projects/sway-config push
+----
+
+// todo Add instructions for using a merge tool to merge disparate settings files.
+
+== Code of Conduct
+
+Please refer to the project's link:CODE_OF_CONDUCT.adoc[Code of Conduct].
+
+== License
+
+This repository is licensed under the https://www.gnu.org/licenses/gpl-3.0.html[GPLv3].
+Please refer to the bundled link:LICENSE.adoc[license].
+
+== Copyright
+
+© 2020-2021 Jordan Williams
+
+== Authors
+
+mailto:{email}[{author}]
