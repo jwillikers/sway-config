@@ -21,7 +21,22 @@ The following instructions detail how to use and sync this repository.
 
 === Install
 
-Install these settings with the following instructions.
+Install Sway and these settings with the following instructions.
+
+. Install the `sway` and `waybar` packages.
+DNF:::
++
+[source,sh]
+----
+sudo dnf -y install sway waybar
+----
+
+rpm-ostree:::
++
+[source,sh]
+----
+sudo rpm-ostree install sway waybar
+----
 
 . Clone this repository.
 +
