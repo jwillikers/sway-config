@@ -28,14 +28,31 @@ DNF:::
 +
 [source,sh]
 ----
-sudo dnf -y install sway waybar
+sudo dnf -y install polkit-gnome sway waybar
 ----
 
 rpm-ostree:::
 +
 [source,sh]
 ----
-sudo rpm-ostree install sway waybar
+sudo rpm-ostree install polkit-gnome sway waybar
+----
+
+. Install Sirula to launch Flatpak applications.
++
+[source,sh]
+----
+sudo rpm-ostree install sway gnome-shell-extension-pop-shell waybar
+
+Use Sirula as the application launcher for Flatpak support
+
+git clone https://github.com/DorianRudolph/sirula.git
+
+cd sirula
+
+toolbox run sudo dnf -y install cargo gtk3-devel gtk-layer-shell-devel
+
+toolbox run cargo install --path .
 ----
 
 . Clone this repository.

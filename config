@@ -221,3 +221,6 @@ include /etc/sway/config.d/*
 
 output eDP-1 pos 0 0 res 1920x1200
 output DP-4 pos 1920 0 res 2560x1440
+
+# Polkit authentication is necessary for logging in as root in apps.
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
