@@ -142,6 +142,34 @@ git -C ~/Projects/sway-config push
 
 // todo Add instructions for using a merge tool to merge disparate settings files.
 
+== Troubleshooting
+
+=== Proprietary NVidia Drivers + GDM
+
+It's now possible to use the proprietary NVidia drivers with Sway, but it requires modifying the command-line for sway to include the flag `--my-next-gpu-wont-be-nvidia`.
+To configure GDM to include this flag, create a new desktop entry.
+
+. Create the necessary configuration directory in `/usr/local` to avoid problems editing the default file under `/usr`. 
++
+[source,sh]
+----
+sudo mkdir -p /usr/local/share/wayland-sessions
+----
+
+. Copy the default `sway.desktop` file to `/usr/local/share/wayland-sessions/sway.desktop`.
++
+[source,sh]
+----
+sudo cp /usr/share/wayland-sessions/sway.desktop /usr/local/share/wayland-sessions/sway.desktop
+----
+
+. Now add the `--my-next-gpu-wont-be-nvidia` flag after the `sway` command in the desktop file.
++
+[source,sh]
+----
+sudo sed -i 's/Exec=sway/Exec=sway --my-next-gpu-wont-be-nvidia/' /usr/local/share/wayland-sessions/sway.desktop
+----
+
 == Code of Conduct
 
 Please refer to the project's link:CODE_OF_CONDUCT.adoc[Code of Conduct].
