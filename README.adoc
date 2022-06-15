@@ -11,6 +11,8 @@ ifdef::env-github[]
 endif::[]
 :Sirula: https://github.com/DorianRudolph/sirula[Sirula]
 :Sway: https://swaywm.org/[Sway]
+:swaylock: https://github.com/swaywm/swaylock[swaylock]
+:swayidle: https://github.com/swaywm/swayidle[swayidle]
 
 My configuration for {Sway}.
 
@@ -24,34 +26,34 @@ The following instructions detail how to use and sync this repository.
 
 Install Sway and these settings with the following instructions.
 
-. Install the `sway` and `waybar` packages along with `lxpolkit` for Polkit authentication.
+. Install the `sway`, `swaylock`, `swayidle`, and `waybar` packages along with `lxpolkit` for Polkit authentication.
 Toolbox will be used to build Sirula below, so install that, too.
 DNF:::
 +
-[source,sh]
+[,sh]
 ----
-sudo dnf -y install git lxpolkit sway toolbox waybar
+sudo dnf -y install git lxpolkit sway swayidle swaylock toolbox waybar
 ----
 
 rpm-ostree:::
 +
-[source,sh]
+[,sh]
 ----
-sudo rpm-ostree install git lxpolkit sway toolbox waybar
+sudo rpm-ostree install lxpolkit sway swayidle swaylock waybar
 ----
 
 . Install the {Sirula} application launcher to have access to Flatpak applications.
 
 .. Clone Sirula's repository. 
 +
-[source,sh]
+[,sh]
 ----
 git -C ~/Projects clone https://github.com/DorianRudolph/sirula.git
 ----
 
 .. Change into the project directory.
 +
-[source,sh]
+[,sh]
 ----
 cd ~/Projects/sirula
 ----
@@ -59,37 +61,57 @@ cd ~/Projects/sirula
 .. Install the required dependencies. 
 This can be done in a toolbox as shown here to avoid messing with your base system.
 +
-[source,sh]
+[,sh]
 ----
 toolbox run sudo dnf -y install cargo gtk3-devel gtk-layer-shell-devel
 ----
 
 .. Now build and install Sirula locally with Cargo.
 +
-[source,sh]
+[,sh]
 ----
 toolbox run cargo install --path .
 ----
 
+.. Add `~/.cargo/bin` to your `PATH` for Cargo's sake.
++
+[,sh]
+----
+fish_add_path -U ~/.cargo/bin
+----
+
 === Configure
+
+. Configure gnome-keyring to be unlocked on login in your shell.
+This example uses the fish shell.
++
+.~/.config/fish/conf.d/gnome-keyring.fish
+[,sh]
+----
+if test -n "$DESKTOP_SESSION"
+    for env_var in (gnome-keyring-daemon --start)
+        set -x (echo $env_var | string split "=")
+    end
+end
+----
 
 . Clone this repository.
 +
-[source,sh]
+[,sh]
 ----
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
 . Create the Sway configuration directory, _~/.config/sway/_.
 +
-[source,sh]
+[,sh]
 ----
 mkdir -p ~/.config/sway/
 ----
 
 . Copy the provided `config` file into the Sway configuration directory.
 +
-[source,sh]
+[,sh]
 ----
 cp ~/Projects/sway-config/config ~/.config/sway/
 ----
@@ -100,75 +122,47 @@ To update the settings in this repository from an existing installation, follow 
 
 . If you haven't already done so, clone this repository.
 +
-[source,sh]
+[,sh]
 ----
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
 . Copy the `config` and `ignore` files from the appropriate location to the Git repository.
 +
-[source,sh]
+[,sh]
 ----
 cp ~/.config/sway/config ~/Projects/sway-config/
 ----
 
 . Validate the Sway configuration file.
 +
-[source,sh]
+[,sh]
 ----
 sway --validate ~/Projects/sway-config/config
 ----
 
 . Stage the updated file.
 +
-[source,sh]
+[,sh]
 ----
 git -C ~/Projects/sway-config add -A
 ----
 
 . Commit.
 +
-[source,sh]
+[,sh]
 ----
 git -C ~/Projects/sway-config commit -m "Update configuration putting all others to shame"
 ----
 
 . Push the changes back to the central repository.
 +
-[source,sh]
+[,sh]
 ----
 git -C ~/Projects/sway-config push
 ----
 
 // todo Add instructions for using a merge tool to merge disparate settings files.
-
-== Troubleshooting
-
-=== Proprietary NVidia Drivers + GDM
-
-It's now possible to use the proprietary NVidia drivers with Sway, but it requires modifying the command-line for sway to include the flag `--my-next-gpu-wont-be-nvidia`.
-To configure GDM to include this flag, create a new desktop entry.
-
-. Create the necessary configuration directory in `/usr/local` to avoid problems editing the default file under `/usr`. 
-+
-[source,sh]
-----
-sudo mkdir -p /usr/local/share/wayland-sessions
-----
-
-. Copy the default `sway.desktop` file to `/usr/local/share/wayland-sessions/sway.desktop`.
-+
-[source,sh]
-----
-sudo cp /usr/share/wayland-sessions/sway.desktop /usr/local/share/wayland-sessions/sway.desktop
-----
-
-. Now add the `--my-next-gpu-wont-be-nvidia` flag after the `sway` command in the desktop file.
-+
-[source,sh]
-----
-sudo sed -i 's/Exec=sway/Exec=sway --my-next-gpu-wont-be-nvidia/' /usr/local/share/wayland-sessions/sway.desktop
-----
 
 == Code of Conduct
 

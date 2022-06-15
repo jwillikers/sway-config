@@ -2,6 +2,7 @@
     "cSpell.words": [
         "adoc",
         "devel",
+        "Flatpak",
         "ifdef",
         "jwillikers",
         "lxpolkit",
@@ -9,6 +10,8 @@
         "ostree",
         "polkit",
         "Sirula",
+        "swayidle",
+        "swaylock",
         "waybar"
     ]
 }
