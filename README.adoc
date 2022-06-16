@@ -82,19 +82,6 @@ fish_add_path -U ~/.cargo/bin
 
 === Configure
 
-. Configure gnome-keyring to be unlocked on login in your shell.
-This example uses the fish shell.
-+
-.~/.config/fish/conf.d/gnome-keyring.fish
-[,sh]
-----
-if test -n "$DESKTOP_SESSION"
-    for env_var in (gnome-keyring-daemon --start)
-        set -x (echo $env_var | string split "=")
-    end
-end
-----
-
 . Clone this repository.
 +
 [,sh]
@@ -163,6 +150,31 @@ git -C ~/Projects/sway-config push
 ----
 
 // todo Add instructions for using a merge tool to merge disparate settings files.
+
+== Additional Steps
+
+For a smooth integration with Sway, I've found the couple of next steps to be necessary for certain odds-and-ends to work.
+
+. Configure gnome-keyring to be unlocked on login in your shell.
+This example uses the fish shell.
++
+.~/.config/fish/conf.d/gnome-keyring.fish
+[,sh]
+----
+if test -n "$DESKTOP_SESSION"
+    for env_var in (gnome-keyring-daemon --start)
+        set -x (echo $env_var | string split "=")
+    end
+end
+----
+
+. For JetBrains IDE's to work, enable the `` environment variable.
+Again, this sets the variable for the fish shell.
++
+[,sh]
+----
+set -Ux _JAVA_AWT_WM_NONREPARENTING 1
+----
 
 == Code of Conduct
 
