@@ -223,7 +223,7 @@ exec swayidle -w \\
 	timeout 1800 'swaylock -f -c 000000' \\
 	timeout 600 'swaymsg "output * dpms off"' \\
 		resume 'swaymsg "output * dpms on"' \\
-	before-sleep 'swaylock -f -c 000000'
+	before-sleep 'swaylock -f -c 000000 -i /usr/share/backgrounds/default.png'
 
 output eDP-1 pos 0 0 res 1920x1200
 output DP-4 pos 1920 0 res 2560x1440
