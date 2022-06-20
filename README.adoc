@@ -161,7 +161,7 @@ This example uses the fish shell.
 .~/.config/fish/conf.d/gnome-keyring.fish
 [,sh]
 ----
-if test -n "$DESKTOP_SESSION"
+if test -n "$DESKTOP_SESSION" -a -z "$container"
     for env_var in (gnome-keyring-daemon --start)
         set -x (echo $env_var | string split "=")
     end
