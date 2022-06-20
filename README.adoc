@@ -89,18 +89,18 @@ fish_add_path -U ~/.cargo/bin
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
-. Create the Sway configuration directory, _~/.config/sway/_.
+. Create the Sway configuration directory, _~/.config/sway/_ and the swaylock directory _~/.config/swaylock_.
 +
 [,sh]
 ----
-mkdir -p ~/.config/sway/
+mkdir -p ~/.config/sway/ ~/.config/swaylock
 ----
 
 . Copy the provided `config` file into the Sway configuration directory.
 +
 [,sh]
 ----
-cp ~/Projects/sway-config/config ~/.config/sway/
+for config_directory in sway swaylock; do cp ~/Projects/sway-config/$config_directory/config ~/.config/$config_directory/config; end
 ----
 
 === Update
@@ -114,11 +114,11 @@ To update the settings in this repository from an existing installation, follow 
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
-. Copy the `config` and `ignore` files from the appropriate location to the Git repository.
+. Copy the Sway and swaylock `config` files from the appropriate location to the Git repository.
 +
 [,sh]
 ----
-cp ~/.config/sway/config ~/Projects/sway-config/
+for config_directory in sway swaylock; do cp ~/.config/$config_directory/config ~/Projects/sway-config/$config_directory/config; end
 ----
 
 . Validate the Sway configuration file.
