@@ -11,6 +11,7 @@ ifdef::env-github[]
 endif::[]
 :Sirula: https://github.com/DorianRudolph/sirula[Sirula]
 :Sway: https://swaywm.org/[Sway]
+:sway-interactive-screenshot: https://github.com/moverest/sway-interactive-screenshot[sway-interactive-screenshot]
 :swaylock: https://github.com/swaywm/swaylock[swaylock]
 :swayidle: https://github.com/swaywm/swayidle[swayidle]
 
@@ -78,6 +79,35 @@ toolbox run cargo install --path .
 [,sh]
 ----
 fish_add_path -U ~/.cargo/bin
+----
+
+. Install the dependencies for {sway-interactive-screenshot}.
++
+[,sh]
+----
+sudo rpm-ostree install fuzzel grim slurp swappy dragon wf-recorder
+----
+
+. Reboot to apply the updates.
++
+[,sh]
+----
+sudo systemctl reboot
+----
+
+. Install the `sway-interactive-screenshot` script to `/usr/local/bin`.
++
+[,sh]
+----
+curl -L https://raw.githubusercontent.com/moverest/sway-interactive-screenshot/master/sway-interactive-screenshot \
+  | sudo tee /usr/local/bin/sway-interactive-screenshot
+----
+
+. Make the script executable.
++
+[,sh]
+----
+sudo chmod +x /usr/local/bin/sway-interactive-screenshot
 ----
 
 === Configure
