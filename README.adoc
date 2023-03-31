@@ -9,6 +9,7 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:mako: https://wayland.emersion.fr/mako/[mako]
 :Sirula: https://github.com/DorianRudolph/sirula[Sirula]
 :Sway: https://swaywm.org/[Sway]
 :sway-interactive-screenshot: https://github.com/moverest/sway-interactive-screenshot[sway-interactive-screenshot]
@@ -27,20 +28,20 @@ The following instructions detail how to use and sync this repository.
 
 Install Sway and these settings with the following instructions.
 
-. Install the `sway`, `swaylock`, `swayidle`, and `waybar` packages along with `lxpolkit` for Polkit authentication.
+. Install the `mako`, `sway`, `swaylock`, `swayidle`, and `waybar` packages along with `lxpolkit` for Polkit authentication.
 Toolbox will be used to build Sirula below, so install that, too.
 DNF:::
 +
 [,sh]
 ----
-sudo dnf -y install git lxpolkit sway swayidle swaylock toolbox waybar
+sudo dnf -y install git lxpolkit mako sway swayidle swaylock toolbox waybar
 ----
 
 rpm-ostree:::
 +
 [,sh]
 ----
-sudo rpm-ostree install lxpolkit sway swayidle swaylock waybar
+sudo rpm-ostree install lxpolkit mako sway swayidle swaylock waybar
 ----
 
 . Install the {Sirula} application launcher to have access to Flatpak applications.
@@ -217,7 +218,7 @@ Please refer to the bundled link:LICENSE.adoc[license].
 
 == Copyright
 
-© 2020-2022 Jordan Williams
+© 2020-2023 Jordan Williams
 
 == Authors
 
