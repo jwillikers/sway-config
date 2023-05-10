@@ -134,6 +134,13 @@ mkdir -p ~/.config/mako ~/.config/sway ~/.config/swaylock
 for config_directory in mako sway swaylock; do cp ~/Projects/sway-config/$config_directory/config ~/.config/$config_directory/config; end
 ----
 
+. Reload Sway.
++
+[,sh]
+----
+swaymsg reload
+----
+
 . Reload mako.
 +
 [,sh]
