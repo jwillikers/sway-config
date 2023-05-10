@@ -120,18 +120,25 @@ sudo chmod +x /usr/local/bin/sway-interactive-screenshot
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
-. Create the Sway configuration directory, _~/.config/sway/_ and the swaylock directory _~/.config/swaylock_.
+. Create the Mako configuration directory _~/.config/mako_, the Sway configuration directory _~/.config/sway_, and the swaylock configuration directory _~/.config/swaylock_.
 +
 [,sh]
 ----
-mkdir -p ~/.config/sway/ ~/.config/swaylock
+mkdir -p ~/.config/mako ~/.config/sway ~/.config/swaylock
 ----
 
 . Copy the provided `config` file into the Sway configuration directory.
 +
 [,sh]
 ----
-for config_directory in sway swaylock; do cp ~/Projects/sway-config/$config_directory/config ~/.config/$config_directory/config; end
+for config_directory in mako sway swaylock; do cp ~/Projects/sway-config/$config_directory/config ~/.config/$config_directory/config; end
+----
+
+. Reload mako.
++
+[,sh]
+----
+makoctl reload
 ----
 
 === Update
@@ -145,11 +152,11 @@ To update the settings in this repository from an existing installation, follow 
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
-. Copy the Sway and swaylock `config` files from the appropriate location to the Git repository.
+. Copy the Mako, Sway, and swaylock `config` files from the appropriate location to the Git repository.
 +
 [,sh]
 ----
-for config_directory in sway swaylock; do cp ~/.config/$config_directory/config ~/Projects/sway-config/$config_directory/config; end
+for config_directory in mako sway swaylock; do cp ~/.config/$config_directory/config ~/Projects/sway-config/$config_directory/config; end
 ----
 
 . Validate the Sway configuration file.
