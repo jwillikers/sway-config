@@ -23,7 +23,7 @@ set $menu /var/home/jordan/.cargo/bin/sirula | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/default.png fill
+output * bg /usr/share/backgrounds/f38/default/f38-01-night.png fill
 #
 # Example configuration:
 #
@@ -219,16 +219,16 @@ bar {
 
 include /etc/sway/config.d/*
 
-# sway-interactive-screenshot keyboard shortcuts
-bindsym Print exec /path/to/sway-interactive-screenshot
-bindsym Shift+Print exec /path/to/sway-interactive-screenshot --video
-
 # swayidle and swaylock configuration
 exec swayidle -w \\
-	timeout 300 'swaylock -f -c 000000' \\
+	timeout 1800 'swaylock -f -c 000000' \\
 	timeout 600 'swaymsg "output * dpms off"' \\
 		resume 'swaymsg "output * dpms on"' \\
-	before-sleep 'swaylock -f -c 000000'
+	before-sleep 'swaylock -f -c 000000 -i /usr/share/backgrounds/f38/default/f38-01-night.png'
+
+# sway-interactive-screenshot keyboard shortcuts
+bindsym Print exec /usr/local/bin/sway-interactive-screenshot
+bindsym Shift+Print exec /usr/local/bin/sway-interactive-screenshot --video
 
 # Multimonitor layout
 output eDP-1 pos 0 0 res 1920x1200
