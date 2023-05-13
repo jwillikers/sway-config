@@ -9,107 +9,16 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
-:mako: https://wayland.emersion.fr/mako/[mako]
-:Sirula: https://github.com/DorianRudolph/sirula[Sirula]
 :Sway: https://swaywm.org/[Sway]
-:sway-interactive-screenshot: https://github.com/moverest/sway-interactive-screenshot[sway-interactive-screenshot]
-:swaylock: https://github.com/swaywm/swaylock[swaylock]
-:swayidle: https://github.com/swaywm/swayidle[swayidle]
+:Fedora-Sericea: https://fedoraproject.org/sericea/[Fedora Sericea]
 
-My configuration for {Sway}.
+My {Sway} configuration on {Fedora-Sericea}.
 
 == Usage
 
-This repository contains my configuration file for {Sway}.
+This repository contains my tweaks for the Fedora Sericea Sway configuration.
 This file is synchronized using this Git repository.
 The following instructions detail how to use and sync this repository.
-
-=== Set Up
-
-Install Sway and these settings with the following instructions.
-
-. Install the `mako`, `sway`, `swaylock`, `swayidle`, and `waybar` packages along with `lxpolkit` for Polkit authentication.
-Toolbox will be used to build Sirula below, so install that, too.
-DNF:::
-+
-[,sh]
-----
-sudo dnf -y install git lxpolkit mako sway swayidle swaylock toolbox waybar
-----
-
-rpm-ostree:::
-+
-[,sh]
-----
-sudo rpm-ostree install lxpolkit mako sway swayidle swaylock waybar
-----
-
-. Install the {Sirula} application launcher to have access to Flatpak applications.
-
-.. Clone Sirula's repository. 
-+
-[,sh]
-----
-git -C ~/Projects clone https://github.com/DorianRudolph/sirula.git
-----
-
-.. Change into the project directory.
-+
-[,sh]
-----
-cd ~/Projects/sirula
-----
-
-.. Install the required dependencies. 
-This can be done in a toolbox as shown here to avoid messing with your base system.
-+
-[,sh]
-----
-toolbox run sudo dnf -y install cargo gtk3-devel gtk-layer-shell-devel
-----
-
-.. Now build and install Sirula locally with Cargo.
-+
-[,sh]
-----
-toolbox run cargo install --path .
-----
-
-.. Add `~/.cargo/bin` to your `PATH` for Cargo's sake.
-+
-[,sh]
-----
-fish_add_path -U ~/.cargo/bin
-----
-
-. Install the dependencies for {sway-interactive-screenshot}.
-+
-[,sh]
-----
-sudo rpm-ostree install fuzzel grim slurp swappy dragon wf-recorder
-----
-
-. Reboot to apply the updates.
-+
-[,sh]
-----
-sudo systemctl reboot
-----
-
-. Install the `sway-interactive-screenshot` script to `/usr/local/bin`.
-+
-[,sh]
-----
-curl -L https://raw.githubusercontent.com/moverest/sway-interactive-screenshot/master/sway-interactive-screenshot \
-  | sudo tee /usr/local/bin/sway-interactive-screenshot
-----
-
-. Make the script executable.
-+
-[,sh]
-----
-sudo chmod +x /usr/local/bin/sway-interactive-screenshot
-----
 
 === Configure
 
@@ -120,18 +29,18 @@ sudo chmod +x /usr/local/bin/sway-interactive-screenshot
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
-. Create the Mako configuration directory _~/.config/mako_, the Sway configuration directory _~/.config/sway_, and the swaylock configuration directory _~/.config/swaylock_.
+. Create the configuration directory _~/.config/sway/config.d_.
 +
 [,sh]
 ----
-mkdir -p ~/.config/mako ~/.config/sway ~/.config/swaylock
+mkdir -p ~/.config/sway/config.d
 ----
 
-. Copy the provided `config` file into the Sway configuration directory.
+. Copy the provided config files into the Sway configuration directory.
 +
 [,sh]
 ----
-for config_directory in mako sway swaylock; do cp ~/Projects/sway-config/$config_directory/config ~/.config/$config_directory/config; end
+cp sway/config.d/*.conf ~/.config/sway/config.d/
 ----
 
 . Reload Sway.
@@ -139,13 +48,6 @@ for config_directory in mako sway swaylock; do cp ~/Projects/sway-config/$config
 [,sh]
 ----
 swaymsg reload
-----
-
-. Reload mako.
-+
-[,sh]
-----
-makoctl reload
 ----
 
 === Update
@@ -163,14 +65,7 @@ git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 +
 [,sh]
 ----
-for config_directory in mako sway swaylock; do cp ~/.config/$config_directory/config ~/Projects/sway-config/$config_directory/config; end
-----
-
-. Validate the Sway configuration file.
-+
-[,sh]
-----
-sway --validate ~/Projects/sway-config/config
+cp ~/.config/sway/config.d/*.conf ~/Projects/sway-config/sway/config.d/
 ----
 
 . Stage the updated file.
@@ -193,8 +88,6 @@ git -C ~/Projects/sway-config commit -m "Update configuration putting all others
 ----
 git -C ~/Projects/sway-config push
 ----
-
-// todo Add instructions for using a merge tool to merge disparate settings files.
 
 == Additional Steps
 
