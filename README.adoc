@@ -114,6 +114,25 @@ Again, this sets the variable for the fish shell.
 set -Ux _JAVA_AWT_WM_NONREPARENTING 1
 ----
 
+. You may have to configure the desired idle behavior for `logind` if you want to computer to suspend or hibernate on idle.
+
+.. Create the `/etc/systemd/logind.conf.d/` directory.
++
+[,sh]
+----
+sudo mkdir -p /etc/systemd/logind.conf.d/
+----
+
+.. Configure the desired behavior in a `.conf` file in the `/etc/systemd/logind.conf.d` directory.
++
+./etc/systemd/logind.conf.d/99-suspend-on-idle.conf
+[,ini]
+----
+[Login]
+IdleAction=suspend
+IdleActionSec=30min
+----
+
 == Code of Conduct
 
 Please refer to the project's link:CODE_OF_CONDUCT.adoc[Code of Conduct].

@@ -5,6 +5,7 @@
         "Flatpak",
         "ifdef",
         "jwillikers",
+        "logind",
         "lxpolkit",
         "mkdir",
         "ostree",
