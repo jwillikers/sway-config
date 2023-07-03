@@ -122,7 +122,7 @@ https://github.com/ErikReider/SwayAudioIdleInhibit[SwayAudioIdleInhibit] prevent
 +
 [,sh]
 ----
-sudo dnf -y install gcc-c++ git meson ninja-build wayland-devel wayland-protocols-devel
+sudo dnf -y install gcc-c++ git meson ninja-build pulseaudio-libs-devel wayland-devel wayland-protocols-devel
 ----
 
 . Clone the `SwayAudioIdleInhibit` Git repository.
