@@ -114,23 +114,50 @@ Again, this sets the variable for the fish shell.
 set -Ux _JAVA_AWT_WM_NONREPARENTING 1
 ----
 
-. You may have to configure the desired idle behavior for `logind` if you want to computer to suspend or hibernate on idle.
+=== SwayAudioIdleInhibit
 
-.. Create the `/etc/systemd/logind.conf.d/` directory.
+https://github.com/ErikReider/SwayAudioIdleInhibit[SwayAudioIdleInhibit] prevents swayidle from activating when audio is being played or received via PulseAudio or Pipewire's PulseAudio implementation.
+
+. Install the required tools.
 +
 [,sh]
 ----
-sudo mkdir -p /etc/systemd/logind.conf.d/
+sudo dnf -y install gcc-c++ git meson ninja-build wayland-devel wayland-protocols-devel
 ----
 
-.. Configure the desired behavior in a `.conf` file in the `/etc/systemd/logind.conf.d` directory.
+. Clone the `SwayAudioIdleInhibit` Git repository.
 +
-./etc/systemd/logind.conf.d/99-suspend-on-idle.conf
-[,ini]
+[,sh]
 ----
-[Login]
-IdleAction=suspend
-IdleActionSec=30min
+git clone https://github.com/ErikReider/SwayAudioIdleInhibit.git
+----
+
+. Change to the project directory.
++
+[,sh]
+----
+cd SwayAudioIdleInhibit
+----
+
+. Configure the build.
++
+[,sh]
+----
+meson setup build
+----
+
+. Compile.
++
+[,sh]
+----
+meson compile -C build
+----
+
+. Install.
++
+[,sh]
+----
+sudo meson install -C build
 ----
 
 == Code of Conduct
