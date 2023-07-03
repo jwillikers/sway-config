@@ -12,6 +12,7 @@
         "Sericea",
         "swayidle",
         "swaylock",
+        "swaymsg",
         "waybar"
     ]
 }
