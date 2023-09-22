@@ -11,12 +11,13 @@ ifdef::env-github[]
 endif::[]
 :Sway: https://swaywm.org/[Sway]
 :Fedora-Sericea: https://fedoraproject.org/sericea/[Fedora Sericea]
+:sway-config-fedora: https://gitlab.com/fedora/sigs/sway/sway-config-fedora[sway-config-fedora]
 
 My {Sway} configuration on {Fedora-Sericea}.
 
 == Usage
 
-This repository contains my tweaks for the Fedora Sericea Sway configuration.
+This repository contains my tweaks for the {sway-config-fedora} used by the F Fedora Sericea.
 This file is synchronized using this Git repository.
 The following instructions detail how to use and sync this repository.
 
