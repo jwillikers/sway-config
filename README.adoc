@@ -21,8 +21,6 @@ This repository contains my tweaks for the {sway-config-fedora} used by the F Fe
 This file is synchronized using this Git repository.
 The following instructions detail how to use and sync this repository.
 
-=== Configure
-
 . Clone this repository.
 +
 [,sh]
@@ -30,18 +28,11 @@ The following instructions detail how to use and sync this repository.
 git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
 ----
 
-. Create the configuration directory _~/.config/sway/config.d_.
+. Symlink the `sway` directory to `~/.config/sway`.
 +
 [,sh]
 ----
-mkdir -p ~/.config/sway/config.d
-----
-
-. Copy the provided config files into the Sway configuration directory.
-+
-[,sh]
-----
-cp sway/config.d/*.conf ~/.config/sway/config.d/
+ln --relative --symbolic ~/Projects/sway-config/sway ~/.config/sway
 ----
 
 . Reload Sway.
@@ -51,63 +42,39 @@ cp sway/config.d/*.conf ~/.config/sway/config.d/
 swaymsg reload
 ----
 
-=== Update
-
-To update the settings in this repository from an existing installation, follow these steps.
-
-. If you haven't already done so, clone this repository.
-+
-[,sh]
-----
-git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
-----
-
-. Copy the Mako, Sway, and swaylock `config` files from the appropriate location to the Git repository.
-+
-[,sh]
-----
-cp ~/.config/sway/config.d/*.conf ~/Projects/sway-config/sway/config.d/
-----
-
-. Stage the updated file.
-+
-[,sh]
-----
-git -C ~/Projects/sway-config add -A
-----
-
-. Commit.
-+
-[,sh]
-----
-git -C ~/Projects/sway-config commit -m "Update configuration putting all others to shame"
-----
-
-. Push the changes back to the central repository.
-+
-[,sh]
-----
-git -C ~/Projects/sway-config push
-----
-
 == Additional Steps
 
 For a smooth integration with Sway, I've found the couple of next steps to be necessary for certain odds-and-ends to work.
 
-. Configure gnome-keyring to be unlocked on login in your shell.
-This example uses the fish shell.
+. Install the gcr package.
 +
-.~/.config/fish/conf.d/gnome-keyring.fish
 [,sh]
 ----
-if test -n "$DESKTOP_SESSION" -a -z "$container"
-    for env_var in (gnome-keyring-daemon --start)
-        set -x (echo $env_var | string split "=")
-    end
-end
+sudo rpm-ostree install gcr
 ----
 
-. For JetBrains IDE's to work, enable the `` environment variable.
+. Reboot.
++
+[,sh]
+----
+sudo systemctl reboot
+----
+
+. Enable the gcr SSH agent socket.
++
+[,sh]
+----
+systemctl --user enable --now gcr-ssh-agent.socket
+----
+
+. Set `SSH_AUTH_SOCK` to the gcr socket.
++
+[,sh]
+----
+set -Ux SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
+----
+
+. For JetBrains IDE's to work, enable the `_JAVA_AWT_WM_NONREPARENTING` environment variable.
 Again, this sets the variable for the fish shell.
 +
 [,sh]
