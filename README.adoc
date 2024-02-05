@@ -46,7 +46,7 @@ swaymsg reload
 
 For a smooth integration with Sway, I've found the couple of next steps to be necessary for certain odds-and-ends to work.
 
-. Install the gcr package.
+. Install the GCR package.
 +
 [,sh]
 ----
@@ -60,14 +60,14 @@ sudo rpm-ostree install gcr
 sudo systemctl reboot
 ----
 
-. Enable the gcr SSH agent socket.
+. Enable the GCR SSH agent socket.
 +
 [,sh]
 ----
 systemctl --user enable --now gcr-ssh-agent.socket
 ----
 
-. Set `SSH_AUTH_SOCK` to the gcr socket.
+. Set `SSH_AUTH_SOCK` to the GCR socket.
 +
 [,sh]
 ----
@@ -90,7 +90,7 @@ https://github.com/ErikReider/SwayAudioIdleInhibit[SwayAudioIdleInhibit] prevent
 +
 [,sh]
 ----
-sudo dnf -y install gcc-c++ git meson ninja-build pulseaudio-libs-devel wayland-devel wayland-protocols-devel
+sudo dnf --assumeyes install gcc-c++ git meson ninja-build pulseaudio-libs-devel wayland-devel wayland-protocols-devel
 ----
 
 . Clone the `SwayAudioIdleInhibit` Git repository.
@@ -139,7 +139,7 @@ Please refer to the bundled link:LICENSE.adoc[license].
 
 == Copyright
 
-© 2020-2023 Jordan Williams
+© 2020-2024 Jordan Williams
 
 == Authors
 

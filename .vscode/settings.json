@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "adoc",
+        "assumeyes",
         "devel",
         "Flatpak",
         "ifdef",
@@ -12,10 +13,33 @@
         "ostree",
         "Pipewire's",
         "polkit",
+        "pulseaudio",
         "Sericea",
         "swayidle",
         "swaylock",
         "swaymsg",
         "waybar"
-    ]
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/sources/poky/bitbake/lib",
+        "${workspaceFolder}/sources/poky/meta/lib"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/sources/poky/bitbake/lib",
+        "${workspaceFolder}/sources/poky/meta/lib"
+    ],
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "gitlens.codeLens.symbolScopes": [
+            "!Module"
+        ],
+        "editor.formatOnType": true,
+        "editor.wordBasedSuggestions": false,
+        "editor.defaultFormatter": "ms-python.python",
+        "files.trimTrailingWhitespace": false
+    },
+    "[shellscript]": {
+        "files.eol": "\n",
+        "files.trimTrailingWhitespace": false
+    }
 }
