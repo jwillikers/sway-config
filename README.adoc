@@ -9,6 +9,7 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:just: https://github.com/casey/just[just]
 :Sway: https://swaywm.org/[Sway]
 :Fedora-Sericea: https://fedoraproject.org/sericea/[Fedora Sericea]
 :sway-config-fedora: https://gitlab.com/fedora/sigs/sway/sway-config-fedora[sway-config-fedora]
@@ -21,111 +22,27 @@ This repository contains my tweaks for the {sway-config-fedora} used by the F Fe
 This file is synchronized using this Git repository.
 The following instructions detail how to use and sync this repository.
 
+. Install {just} by following the instructions in the https://github.com/casey/just?tab=readme-ov-file#installation[installation section].
+
 . Clone this repository.
 +
 [,sh]
 ----
-git -C ~/Projects clone git@github.com:jwillikers/sway-config.git
+git clone git@github.com:jwillikers/sway-config.git
 ----
 
-. Symlink the `sway` directory to `~/.config/sway`.
+. Change to the repository's directory.
 +
 [,sh]
 ----
-ln --relative --symbolic ~/Projects/sway-config/sway ~/.config/sway
+cd sway-config
 ----
 
-. Reload Sway.
+. Run `just` to install everything.
 +
 [,sh]
 ----
-swaymsg reload
-----
-
-== Additional Steps
-
-For a smooth integration with Sway, I've found the couple of next steps to be necessary for certain odds-and-ends to work.
-
-. Install the GCR package.
-+
-[,sh]
-----
-sudo rpm-ostree install gcr
-----
-
-. Reboot.
-+
-[,sh]
-----
-sudo systemctl reboot
-----
-
-. Enable the GCR SSH agent socket.
-+
-[,sh]
-----
-systemctl --user enable --now gcr-ssh-agent.socket
-----
-
-. Set `SSH_AUTH_SOCK` to the GCR socket.
-+
-[,sh]
-----
-set -Ux SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
-----
-
-. For JetBrains IDE's to work, enable the `_JAVA_AWT_WM_NONREPARENTING` environment variable.
-Again, this sets the variable for the fish shell.
-+
-[,sh]
-----
-set -Ux _JAVA_AWT_WM_NONREPARENTING 1
-----
-
-=== SwayAudioIdleInhibit
-
-https://github.com/ErikReider/SwayAudioIdleInhibit[SwayAudioIdleInhibit] prevents swayidle from activating when audio is being played or received via PulseAudio or Pipewire's PulseAudio implementation.
-
-. Install the required tools.
-+
-[,sh]
-----
-sudo dnf --assumeyes install gcc-c++ git meson ninja-build pulseaudio-libs-devel wayland-devel wayland-protocols-devel
-----
-
-. Clone the `SwayAudioIdleInhibit` Git repository.
-+
-[,sh]
-----
-git clone https://github.com/ErikReider/SwayAudioIdleInhibit.git
-----
-
-. Change to the project directory.
-+
-[,sh]
-----
-cd SwayAudioIdleInhibit
-----
-
-. Configure the build.
-+
-[,sh]
-----
-meson setup build
-----
-
-. Compile.
-+
-[,sh]
-----
-meson compile -C build
-----
-
-. Install.
-+
-[,sh]
-----
-sudo meson install -C build
+just
 ----
 
 == Code of Conduct
