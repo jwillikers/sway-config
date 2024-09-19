@@ -1,6 +1,6 @@
 default: install
 
-SwayAudioIdleInhibit_ref := "8ac8608d31e18e5a064002c2a1ef73a683ea9537"
+SwayAudioIdleInhibit_ref := "e660559718913c1e3d3aadf03f2986ed687d4fb9"
 
 alias f := format
 alias fmt := format
