@@ -42,5 +42,6 @@
     "[shellscript]": {
         "files.eol": "\n",
         "files.trimTrailingWhitespace": false
-    }
+    },
+    "asciidoc.antora.enableAntoraSupport": false
 }
