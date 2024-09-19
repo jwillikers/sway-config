@@ -22,7 +22,7 @@ install-SwayAudioIdleInhibit:
                 git clone https://github.com/ErikReider/SwayAudioIdleInhibit.git
             fi
             cd SwayAudioIdleInhibit
-            git checkout --detach "{{ SwayAudioIdleInhibit_ref }}"
+            git switch --detach "{{ SwayAudioIdleInhibit_ref }}"
             meson setup build -Dbuildtype=release
             meson compile -C build
         elif [ "$variant" = "iot" ] || [ "$variant" = "sericea" ]; then
