@@ -17,7 +17,7 @@ install-SwayAudioIdleInhibit:
         if [ "$variant" = "container" ]; then
             sudo dnf --assumeyes install gcc-c++ git meson ninja-build pulseaudio-libs-devel wayland-devel wayland-protocols-devel
             if [ -d "SwayAudioIdleInhibit" ]; then
-                git -C SwayAudioIdleInhibit fetch 
+                git -C SwayAudioIdleInhibit fetch
             else
                 git clone https://github.com/ErikReider/SwayAudioIdleInhibit.git
             fi
@@ -25,7 +25,7 @@ install-SwayAudioIdleInhibit:
             git switch --detach "{{ SwayAudioIdleInhibit_ref }}"
             meson setup build -Dbuildtype=release
             meson compile -C build
-        elif [ "$variant" = "iot" ] || [ "$variant" = "sericea" ]; then
+        elif [ "$variant" = "iot" ] || [ "$variant" = "sway-atomic" ]; then
             sudo rpm-ostree install --idempotent meson
             echo "You may need to reboot and re-run to finish installation."
             mkdir --parents build
@@ -58,7 +58,7 @@ install: install-SwayAudioIdleInhibit
         variant=$(awk -F= '$1=="VARIANT_ID" { print $2 ;}' /etc/os-release)
         if [ "$variant" = "container" ]; then
             sudo dnf --assumeyes install gcr pre-commit
-        elif [ "$variant" = "iot" ] || [ "$variant" = "sericea" ]; then
+        elif [ "$variant" = "iot" ] || [ "$variant" = "sway-atomic" ]; then
             sudo rpm-ostree install --idempotent gcr pre-commit
             echo "You may need to reboot and re-run to finish installation."
         fi
