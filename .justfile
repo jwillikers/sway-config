@@ -14,7 +14,7 @@ install-SwayAudioIdleInhibit:
     distro=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
     if [ "$distro" = "fedora" ]; then
         variant=$(awk -F= '$1=="VARIANT_ID" { print $2 ;}' /etc/os-release)
-        if [ "$variant" = "container" ]; then
+        if [ "$variant" = "toolbx" ]; then
             sudo dnf --assumeyes install gcc-c++ git meson ninja-build pulseaudio-libs-devel wayland-devel wayland-protocols-devel
             if [ -d "SwayAudioIdleInhibit" ]; then
                 git -C SwayAudioIdleInhibit fetch
@@ -56,7 +56,7 @@ install: install-SwayAudioIdleInhibit
     distro=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
     if [ "$distro" = "fedora" ]; then
         variant=$(awk -F= '$1=="VARIANT_ID" { print $2 ;}' /etc/os-release)
-        if [ "$variant" = "container" ]; then
+        if [ "$variant" = "toolbx" ]; then
             sudo dnf --assumeyes install gcr pre-commit
         elif [ "$variant" = "iot" ] || [[ "$variant" = *-atomic ]]; then
             sudo rpm-ostree install --idempotent gcr pre-commit
